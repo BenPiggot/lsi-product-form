@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProjectCreateHeader = () => {
+const CreateProjectHeader = () => {
   return (
     <div className="row">
       <div className="col-sm-12">
@@ -17,4 +17,4 @@ const ProjectCreateHeader = () => {
   )
 }
 
-export default ProjectCreateHeader;
+export default CreateProjectHeader;

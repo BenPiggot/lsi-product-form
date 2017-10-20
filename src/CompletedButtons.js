@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 
 class CompletedButtons extends Component {
   render() {
+    const display = this.props.projectCreated ? 'none' : 'display';
     return (
       <div style={{ clear: 'both' }} className="form-actions form-wrapper form-group">
         { this.props.top ? 
-          <button className="btn-primary project-create btn btn-success form-submit" onClick={this.props.activateCreateProject}>
+          <button className="btn-primary project-create btn btn-success form-submit" style={{ display: display }} onClick={this.props.activateCreateProject}>
             Create Project
           </button> :
           <button className="btn-info summary-download btn form-submit" >

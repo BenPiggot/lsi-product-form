@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import InitialHeader from './headers/InitialHeader';
 import SummaryHeader from './headers/SummaryHeader';
-import ProjectCreateHeader from './headers/ProjectCreateHeader';
+import CreateProjectHeader from './headers/CreateProjectHeader';
+import ProjectCreatedHeader from './headers/ProjectCreatedHeader';
 import Form from './Form';
 import Summary from './Summary';
+import ProjectForm from './ProjectForm';
 import ModelNumber from './ModelNumber';
 import CompletedButtons from './CompletedButtons';
 
@@ -13,11 +15,13 @@ class App extends Component {
 
     this.state = {
       productCompleted: true,
-      createProjectActive: false
+      createProjectActive: false,
+      projectCreated: false
     }
 
     this.addAnotherProduct = this.addAnotherProduct.bind(this);
     this.activateCreateProject = this.activateCreateProject.bind(this);
+    this.createProject = this.createProject.bind(this);
   }
 
   addAnotherProduct() {
@@ -32,9 +36,19 @@ class App extends Component {
     })
   }
 
+  createProject() {
+    this.setState({
+      createProjectActive: false,
+      projectCreated: true
+    })
+  }
+
   renderHeader() {
-    if (this.state.createProjectActive) {
-      return <ProjectCreateHeader />
+    if (this.state.projectCreated) {
+      return <ProjectCreatedHeader />
+    }
+    else if (this.state.createProjectActive) {
+      return <CreateProjectHeader />
     }
     else if (this.state.productCompleted && !this.state.activateCreateProject) {
       return <SummaryHeader />
@@ -44,30 +58,47 @@ class App extends Component {
     }
   }
 
-  render() {
-    return (
-      <div className="main-container container">
-        { this.renderHeader() }
-        { this.}
-        { 
-          this.state.productCompleted ? 
+  renderContainer() {
+    if (this.state.createProjectActive) {
+      return (
+        <div>
+          <ProjectForm createProject={this.createProject} />
+        </div>
+      )
+    }
+    else if (this.state.productCompleted && !this.state.activateCreateProject) {
+      return ( 
+        <div>
           <CompletedButtons 
+            projectCreated={this.state.projectCreated}
             addAnotherProduct={this.addAnotherProduct} 
             activateCreateProject={this.activateCreateProject}
             top={true} 
-          /> : 
-          null 
-        }
-        { !this.state.productCompleted ? <Form /> : <Summary /> }
-        { 
-          !this.state.productCompleted ? 
-          <ModelNumber /> : 
+          /> 
+          <Summary />
           <CompletedButtons 
             addAnotherProduct={this.addAnotherProduct} 
             activateCreateProject={this.activateCreateProject}
             top={false} 
           /> 
-        }
+        </div>
+      )
+    }
+    else {
+      return (
+        <div>
+          <Summary />
+          <ModelNumber />
+        </div>
+      )
+    }
+  }
+
+  render() {
+    return (
+      <div className="main-container container">
+        { this.renderHeader() }
+        { this.renderContainer() }
       </div>
     )
   }
