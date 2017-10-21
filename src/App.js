@@ -6,6 +6,7 @@ import ProjectCreatedHeader from './headers/ProjectCreatedHeader';
 import Form from './Form';
 import Summary from './Summary';
 import ProjectForm from './ProjectForm';
+import DownloadOrShare from './DownloadOrShare';
 import ModelNumber from './ModelNumber';
 import CompletedButtons from './CompletedButtons';
 
@@ -16,12 +17,15 @@ class App extends Component {
     this.state = {
       productCompleted: true,
       createProjectActive: false,
-      projectCreated: false
+      projectCreated: false,
+      downloadOrShare: false
     }
 
     this.addAnotherProduct = this.addAnotherProduct.bind(this);
     this.activateCreateProject = this.activateCreateProject.bind(this);
     this.createProject = this.createProject.bind(this);
+    this.activateDownloadOrShare = this.activateDownloadOrShare.bind(this);
+    this.cancelDownloadOrShare = this.cancelDownloadOrShare.bind(this);
   }
 
   addAnotherProduct() {
@@ -36,6 +40,20 @@ class App extends Component {
     })
   }
 
+  activateDownloadOrShare() {
+    this.setState({
+      downloadOrShare: true
+    })
+  }
+
+  cancelDownloadOrShare() {
+    this.setState({
+      downloadOrShare: false,
+      projectCreated: false,
+      productCompleted: true
+    })
+  }
+
   createProject() {
     this.setState({
       createProjectActive: false,
@@ -44,7 +62,10 @@ class App extends Component {
   }
 
   renderHeader() {
-    if (this.state.projectCreated) {
+    if (this.state.downloadOrShare) {
+      return null;
+    }
+    else if (this.state.projectCreated) {
       return <ProjectCreatedHeader />
     }
     else if (this.state.createProjectActive) {
@@ -59,7 +80,12 @@ class App extends Component {
   }
 
   renderContainer() {
-    if (this.state.createProjectActive) {
+    if (this.state.downloadOrShare) {
+      return (
+        <DownloadOrShare cancelDownloadOrShare={this.cancelDownloadOrShare} />
+      )
+    }
+    else if (this.state.createProjectActive) {
       return (
         <div>
           <ProjectForm createProject={this.createProject} />
@@ -79,6 +105,7 @@ class App extends Component {
           <CompletedButtons 
             addAnotherProduct={this.addAnotherProduct} 
             activateCreateProject={this.activateCreateProject}
+            activateDownloadOrShare={this.activateDownloadOrShare}
             top={false} 
           /> 
         </div>

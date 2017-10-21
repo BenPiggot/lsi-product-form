@@ -9,7 +9,7 @@ const InitialHeader = () => {
             <h1>Product Builder</h1>
             <h3>Add Product</h3>
             <p>Welcome to your LED Product Builder. Here you can configure a fixture to your specifications then export the details into a PDF document. Lighting Services does not record the data you enter and it is for your professional use only.</p>
-            <p>(During your session, please do not use your browser’s back button, please use the navigation buttons within the Product Builder to modify selections, add or delete products.)</p>
+            <p><i>(During your session, please do not use your browser’s back button, please use the navigation buttons within the Product Builder to modify selections, add or delete products.)</i></p>
           </div>
         </div>
       </div>

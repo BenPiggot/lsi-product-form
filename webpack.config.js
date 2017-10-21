@@ -3,11 +3,11 @@ const path = require("path");
 module.exports = {
   entry: './index',
   output: {
-    path: path.resolve(__dirname, './public'),
-    filename: 'bundle.js'
+    path: path.resolve(__dirname, './dist'),
+    filename: 'builder.js'
   },
   devServer: {
-    publicPath: '/public',
+    publicPath: '/dist',
     historyApiFallback: true,
     contentBase: './'
   },

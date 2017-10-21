@@ -9,7 +9,7 @@ class CompletedButtons extends Component {
           <button className="btn-primary project-create btn btn-success form-submit" style={{ display: display }} onClick={this.props.activateCreateProject}>
             Create Project
           </button> :
-          <button className="btn-info summary-download btn form-submit" >
+          <button className="btn-info summary-download btn form-submit" onClick={this.props.activateDownloadOrShare}>
             <span className="icon glyphicon glyphicon-download" aria-hidden="true"></span>
             Finish: Download or Share
           </button> 
